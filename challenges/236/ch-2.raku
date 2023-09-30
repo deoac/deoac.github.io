@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 2
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 07:03:02 PM EDT
+# Last modified: Sat 30 Sep 2023 07:38:41 PM EDT
 # Version 0.0.1
 
 # always use the latest version of Raku
@@ -13,7 +13,7 @@ multi MAIN (#| A list of unique integers
             *@input where .all ~~ Int &&
                           .unique.elems == .elems,
             #| Show debug prints when True
-            Bool :v($verbose) = False
+            Bool :v($verbose) = False 
         ) {
 
     my Int @ints          = @input>>.Int;
@@ -74,7 +74,7 @@ multi MAIN (#| A list of unique integers
     say "\n\n\e[35mAll loops:\n" ~ @all-loops.join("\n") ~ "\e[0m\n"
         if $verbose;
 
-    print "Number of loops: " if $verbose;
+    print "Number of loops: " if $verbose; 
     say @all-loops.elems;
 
     return @all-loops.elems;
