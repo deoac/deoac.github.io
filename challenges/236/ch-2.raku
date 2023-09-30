@@ -1,9 +1,8 @@
-<html><pre><code class="language-raku">
 #! /usr/bin/env raku
 
 # Perl Weekly Challenge #236 Task 2
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 06:51:22 PM EDT
+# Last modified: Sat 30 Sep 2023 07:03:02 PM EDT
 # Version 0.0.1
 
 # always use the latest version of Raku
@@ -127,4 +126,3 @@ multi MAIN (Bool :$test!) {
         cmp-ok .<got>, .<op>, .<expected>, .<desc>;
     } # end of for @tests
 } # end of multi MAIN (:$test!)
-</code></pre></html>

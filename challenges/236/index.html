@@ -4,7 +4,6 @@
 <title>The Perl Weekly Challenge</title>
 <meta charset="UTF-8" />
 
-<link href="/asset_files/images/favicon.ico" rel="icon" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-extra.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-styling.css" />
@@ -15,15 +14,15 @@
 <img id="Camelia_bug" src="/asset_files/images/Camelia.svg"><h1 class="title">The Perl Weekly Challenge</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
 <caption>Table of Contents</caption>
 <tr class="toc-level-2"><td class="toc-text"><a href="#Challenge_#236_Task_2,_Array_Loops">Challenge #236 Task 2, Array Loops</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">Example 1</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">Example 2</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">Example 3</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3</a></td></tr>
  <tr class="toc-level-2"><td class="toc-text"><a href="#The_Solution">The Solution</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">The Basic Algorithm</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_variables">Initialize variables</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#The_Main_Loop">The Main Loop</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_the_number_of_loops_found.">Print and return the number of loops found.</a></td></tr>
- <tr class="toc-level-2"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Basic Algorithm</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_variables">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initialize variables</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Main_Loop">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Main Loop</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_the_number_of_loops_found.">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print and return the number of loops found.</a></td></tr>
+ <tr class="toc-level-2"><td class="toc-text"><a href="#Sample_run_with_debug_prints">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample run with debug prints</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#AUTHOR">AUTHOR</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#LICENCE_AND_COPYRIGHT">LICENCE AND COPYRIGHT</a></td></tr>
 </table></div>
@@ -112,7 +111,7 @@ Loop is as below:
 <p>Thus, we have found a loop that is not closed. Each element we've found so far is a loop by itself. So we push each element to the list of all loops.</p></section>
 <section name="pod"><pre class="pod-block-code">   18|             when * ≥ $num-elems {
    19|                 @all-loops.push: $_ for @cur-loop;
-   20|             } 
+   20|             }
 </pre></section>
 <section name="pod"><ul>
 <li><p>We have found a closed loop</p></li>
@@ -120,7 +119,7 @@ Loop is as below:
 <p>When the next index is the same as the start pointer, we have found a closed loop. We push the current loop to the list of all loops.</p></section>
 <section name="pod"><pre class="pod-block-code">   21|             when $start-pointer {
    22|                 @all-loops.push: @cur-loop.clone;
-   23|             } 
+   23|             }
 </pre></section>
 <section name="pod"><ul>
 <li><p>We have found a value that is not in the current loop.</p></li>
@@ -129,24 +128,24 @@ Loop is as below:
 <section name="pod"><pre class="pod-block-code">   24|             default {
    25|                 $cur-index = $cur-value;
    26|                 next INDEX;
-   27|             } 
-   28| 
-   29|         } 
+   27|             }
+   28|
+   29|         }
 </pre></section>
 <section name="pod"><p>At this point we have found a loop or single-item loop[s]. We need to find the next start pointer by looking for the next defined element in the array.</p></section>
 <section name="pod"><pre class="pod-block-code">   30|         @cur-loop = [];
    31|         $start-pointer = $cur-index = @ints.first(*.defined, :k);
-   32| 
-   33|     } 
-   34| 
+   32|
+   33|     }
+   34|
 </pre></section>
 <section name="pod">
 <h3 id="Print_and_return_the_number_of_loops_found."><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Print and return the number of loops found.</a></h3>
 </section>
 <section name="pod"><pre class="pod-block-code">   35|     say @all-loops.elems;
-   36| 
+   36|
    37|     return @all-loops.elems;
-   38| } 
+   38| }
 </pre></section>
 <section name="pod">
 <h2 id="Sample_run_with_debug_prints"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Sample run with debug prints</a></h2>
