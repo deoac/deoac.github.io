@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>The Perl Weekly Challenge</title>
+<meta charset="UTF-8" />
+
+<link href="/asset_files/images/favicon.ico" rel="icon" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-extra.css" />
+<link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-styling.css" />
+
+</head>
+	<body class="pod">
+<header>
+<img id="Camelia_bug" src="/asset_files/images/Camelia.svg"><h1 class="title">The Perl Weekly Challenge</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
+<caption>Table of Contents</caption>
+<tr class="toc-level-2"><td class="toc-text"><a href="#Challenge_#236_Task_2,_Array_Loops">Challenge #236 Task 2, Array Loops</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">Example 1</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">Example 2</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">Example 3</a></td></tr>
+ <tr class="toc-level-2"><td class="toc-text"><a href="#The_Solution">The Solution</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">The Basic Algorithm</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_variables">Initialize variables</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Main_Loop">The Main Loop</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_the_number_of_loops_found.">Print and return the number of loops found.</a></td></tr>
+ <tr class="toc-level-2"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
+ <tr class="toc-level-1"><td class="toc-text"><a href="#AUTHOR">AUTHOR</a></td></tr>
+ <tr class="toc-level-1"><td class="toc-text"><a href="#LICENCE_AND_COPYRIGHT">LICENCE AND COPYRIGHT</a></td></tr>
+</table></div>
+</nav><div id=""></div><div class="subtitle"><p>Submitted By: Mark Anderson</p></div><div class="pod-body">
+<section name="___top">
+<h2 id="Challenge_#236_Task_2,_Array_Loops"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Challenge #236 Task 2, Array Loops</a></h2>
+<p>You are given an array of unique integers.</p><p>Write a script to determine how many loops are in the given array.</p><dl>
+<dt>To determine a loop: Start at an index and take the number at array[index] and then proceed to that index and continue this until you end up at the starting index.</dt><dd></dd>
+</dl>
+<h3 id="Example_1"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 1</a></h3>
+<pre class="pod-block-code">Input: @ints = (4,6,3,8,15,0,13,18,7,16,14,19,17,5,11,1,12,2,9,10)
+Output: 3
+
+To determine the 1st loop, start at index 0, the number at that index is 4,
+proceed to index 4, the number at that index is 15, proceed to index 15 and so
+on until you're back at index 0.
+
+Loops are as below:
+[4 15 1 6 13 5 0]
+[3 8 7 18 9 16 12 17 2]
+[14 11 19 10]
+
+</pre>
+<h3 id="Example_2"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 2</a></h3>
+<pre class="pod-block-code">Input: @ints = (0,1,13,7,6,8,10,11,2,14,16,4,12,9,17,5,3,18,15,19)
+Output: 6
+
+Loops are as below:
+[0]
+[1]
+[13 9 14 17 18 15 5 8 2]
+[7 11 4 6 10 16 3]
+[12]
+[19]
+</pre>
+<h3 id="Example_3"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 3</a></h3>
+<pre class="pod-block-code">Input: @ints = (9,8,3,11,5,7,13,19,12,4,14,10,18,2,16,1,0,15,6,17)
+Output: 1
+
+Loop is as below:
+[9 4 5 7 19 17 15 1 8 12 18 6 13 2 3 11 10 14 16 0]
+</pre>
+<h2 id="The_Solution"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Solution</a></h2>
+</section>
+<section name="pod">
+<h3 id="The_Basic_Algorithm"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Basic Algorithm</a></h3>
+<p>We will create a pointer to the first index of the array and attempt to find a loop that starts with that element.</p><p>It's important to remember that each element can be a part of only <u>one</u> loop, even if it is a loop by itself.</p><p>Every time we find an element, we will push it to a current-loop array and set the element to <code>Nil</code> so that we don't use it again.</p><p>If we find a loop<sup><a name="fnret1" href="#fn1">[1]</a></sup>
+, we will push it to an array of loops. Note that a loop can consist of a single element. After we find a loop, we will move the start pointer to the next defined element and try again.</p><p>First we will only accept input that is a list of unique integers.</p></section>
+<section name="pod"><pre class="pod-block-code">    1| multi MAIN (#| A list of unique integers
+    2|             *@input where .all ~~ Int &amp;&amp;
+    3|                           .unique.elems == .elems,
+    4|         ) {
+</pre></section>
+<section name="pod">
+<h3 id="Initialize_variables"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Initialize variables</a></h3>
+</section>
+<section name="pod"><pre class="pod-block-code">    5|     my Int @ints          = @input&gt;&gt;.Int;
+    6|     my Int $num-elems     = @ints.elems;
+    7|     my Int $start-pointer = 0;
+    8|     my Int $cur-index     = $start-pointer;
+</pre></section>
+<section name="pod"><p>The current loop we are working on is stored in <code>@cur-loop</code>. The list of all found loops is stored in <code>@all-loops</code>.</p></section>
+<section name="pod"><pre class="pod-block-code">    9|     my @cur-loop  = [];
+   10|     my @all-loops = [];
+</pre></section>
+<section name="pod">
+<h3 id="The_Main_Loop"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Main Loop</a></h3>
+<p>As long as there is a defined element in the array, <code>$start-pointer</code>, we will try to find a loop that starts with that element.</p></section>
+<section name="pod"><pre class="pod-block-code">   11|     INDEX:
+   12|     while $start-pointer.defined {
+</pre></section>
+<section name="pod"><p>We get the value of the current element and use it as the index of the next element in the loop.</p></section>
+<section name="pod"><pre class="pod-block-code">   13|         my $cur-value  = @ints[$cur-index];
+   14|         my $next-index = $cur-value;
+</pre></section>
+<section name="pod"><p>Each value we are looking at gets pushed to the current loop array and set to <code>Nil</code> so that we don't use it again.</p></section>
+<section name="pod"><pre class="pod-block-code">   15|         @cur-loop.push: $cur-value;
+   16|         @ints[$cur-index] = Nil;
+</pre></section>
+<section name="pod"><p>At this point there are three possibilities:</p></section>
+<section name="pod"><pre class="pod-block-code">   17|         given $next-index {
+</pre></section>
+<section name="pod"><ul>
+<li><p>We have reached an index that is greater than the number of elements in the original array.</p></li>
+</ul>
+<p>Thus, we have found a loop that is not closed. Each element we've found so far is a loop by itself. So we push each element to the list of all loops.</p></section>
+<section name="pod"><pre class="pod-block-code">   18|             when * ≥ $num-elems {
+   19|                 @all-loops.push: $_ for @cur-loop;
+   20|             } 
+</pre></section>
+<section name="pod"><ul>
+<li><p>We have found a closed loop</p></li>
+</ul>
+<p>When the next index is the same as the start pointer, we have found a closed loop. We push the current loop to the list of all loops.</p></section>
+<section name="pod"><pre class="pod-block-code">   21|             when $start-pointer {
+   22|                 @all-loops.push: @cur-loop.clone;
+   23|             } 
+</pre></section>
+<section name="pod"><ul>
+<li><p>We have found a value that is not in the current loop.</p></li>
+</ul>
+<p>So we continue looking for the next element in the loop by updating the current index.</p></section>
+<section name="pod"><pre class="pod-block-code">   24|             default {
+   25|                 $cur-index = $cur-value;
+   26|                 next INDEX;
+   27|             } 
+   28| 
+   29|         } 
+</pre></section>
+<section name="pod"><p>At this point we have found a loop or single-item loop[s]. We need to find the next start pointer by looking for the next defined element in the array.</p></section>
+<section name="pod"><pre class="pod-block-code">   30|         @cur-loop = [];
+   31|         $start-pointer = $cur-index = @ints.first(*.defined, :k);
+   32| 
+   33|     } 
+   34| 
+</pre></section>
+<section name="pod">
+<h3 id="Print_and_return_the_number_of_loops_found."><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Print and return the number of loops found.</a></h3>
+</section>
+<section name="pod"><pre class="pod-block-code">   35|     say @all-loops.elems;
+   36| 
+   37|     return @all-loops.elems;
+   38| } 
+</pre></section>
+<section name="pod">
+<h2 id="Sample_run_with_debug_prints"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Sample run with debug prints</a></h2>
+<p>(The option <code>--verbose</code> and the debug print statements are not shown in the above code.)</p><pre class="pod-block-code">$ ./ch-2.raku --verbose 1 0 8 5 4 3 9
+
+Array[Int] @ints = Array[Int].new(Int, 0, 8, 5, 4, 3, 9)
+Int $start-pointer = 0
+Int $cur-index = 0
+Int $next-index = 1
+Int $cur-value = 1
+Array @cur-loop = [1]
+Continuing loop: 1
+Array[Int] @ints = Array[Int].new(Int, Int, 8, 5, 4, 3, 9)
+Int $start-pointer = 0
+Int $cur-index = 1
+Int $next-index = 0
+Int $cur-value = 0
+Array @cur-loop = [1, 0]
+Found a loop: 1 0
+
+Starting new loop at index 2
+Array[Int] @ints = Array[Int].new(Int, Int, Int, 5, 4, 3, 9)
+Int $start-pointer = 2
+Int $cur-index = 2
+Int $next-index = 8
+Int $cur-value = 8
+Array @cur-loop = [8]
+Found single-item loop[s]: [8]
+
+Starting new loop at index 3
+Array[Int] @ints = Array[Int].new(Int, Int, Int, Int, 4, 3, 9)
+Int $start-pointer = 3
+Int $cur-index = 3
+Int $next-index = 5
+Int $cur-value = 5
+Array @cur-loop = [5]
+Continuing loop: 5
+Array[Int] @ints = Array[Int].new(Int, Int, Int, Int, 4, Int, 9)
+Int $start-pointer = 3
+Int $cur-index = 5
+Int $next-index = 3
+Int $cur-value = 3
+Array @cur-loop = [5, 3]
+Found a loop: 5 3
+
+Starting new loop at index 4
+Array[Int] @ints = Array[Int].new(Int, Int, Int, Int, Int, Int, 9)
+Int $start-pointer = 4
+Int $cur-index = 4
+Int $next-index = 4
+Int $cur-value = 4
+Array @cur-loop = [4]
+Found a loop: 4
+
+Starting new loop at index 6
+Array[Int] @ints = Array[Int].new(Int, Int, Int, Int, Int, Int, Int)
+Int $start-pointer = 6
+Int $cur-index = 6
+Int $next-index = 9
+Int $cur-value = 9
+Array @cur-loop = [9]
+Found single-item loop[s]: [9]
+
+
+All loops:
+1 0
+8
+5 3
+4
+9
+
+Number of loops: 5
+</pre></section>
+<section name="pod">
+<h1 id="AUTHOR"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">AUTHOR</a></h1>
+<p>Shimon Bollinger (deoac.shimon@gmail.com)</p><p>Comments and Pull Requests are welcome.</p>
+<h1 id="LICENCE_AND_COPYRIGHT"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
+<p>© 2023 Shimon Bollinger. All rights reserved.</p><p>This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself. See <a href="http://perldoc.perl.org/perlartistic.html">perlartistic</a>.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p></section>		</div>
+<div id="_Footnotes" class="footnotes">
+<ul><li id="fn1"><span class="footnote-number">1</span>A 'loop' is defined as a list of array element values, not a list of the array's indices.<a class="footnote" href="#fnret1"> « Back »</a></li>
+
+</ul>
+</div>
+</div><footer><div>Rendered from <span class="path"></span></div><div>at <span class="time">2023-09-30T22:39:17Z</span></div></footer>
+	</body>
+</html>
+
