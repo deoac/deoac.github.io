@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 2
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 07:38:41 PM EDT
+# Last modified: Sat 30 Sep 2023 07:51:54 PM EDT
 # Version 0.0.1
 
 # begin-no-weave
@@ -341,8 +341,8 @@ Number of loops: 5
 
 Shimon Bollinger  (deoac.shimon@gmail.com)
 
-=comment The complete source can be located at:
-Z<Challenge 236, Task 2|https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b>
+The complete source can be located at:
+L<Challenge 236, Task 2|https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b>
 
 Comments and Pull Requests are welcome.
 

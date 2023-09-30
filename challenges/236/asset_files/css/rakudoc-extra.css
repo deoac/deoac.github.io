@@ -1,4 +1,14 @@
 
+div.latex-render {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+div.latex-render img.logo {
+  align-self: center;
+}
+
+
 .image-container {
   display: flex;
   width: 100%;
@@ -53,13 +63,3 @@ p.quotation .citation {
 div.flex-container {
   display: flex;
 }
-
-div.latex-render {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-div.latex-render img.logo {
-  align-self: center;
-}
-
