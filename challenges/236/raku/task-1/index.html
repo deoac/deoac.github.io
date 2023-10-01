@@ -4,7 +4,6 @@
 <title>Challenge #236 Task 1</title>
 <meta charset="UTF-8" />
 
-<link href="/asset_files/images/favicon.ico" rel="icon" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-extra.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-styling.css" />
@@ -12,17 +11,17 @@
 </head>
 	<body class="pod">
 <header>
-<img id="Camelia_bug" src="/asset_files/images/Camelia.svg"><h1 class="title">Challenge #236 Task 1</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
+<h1 class="title">Challenge #236 Task 1</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
 <caption>Table of Contents</caption>
 <tr class="toc-level-2"><td class="toc-text"><a href="#The_Challenge">The Challenge</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">Example 1</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">Example 2</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">Example 3</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3</a></td></tr>
  <tr class="toc-level-2"><td class="toc-text"><a href="#The_Solution">The Solution</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">The Basic Algorithm</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_the_variables">Initialize the variables</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Process_the_bills">Process the bills</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_whether_the_bills_can_be_used_to_make_change.">Print and return whether the bills can be used to make change.</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Basic Algorithm</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_the_variables">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initialize the variables</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Process_the_bills">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process the bills</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_whether_the_bills_can_be_used_to_make_change.">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print and return whether the bills can be used to make change.</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#AUTHOR">AUTHOR</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#RAKU_SOURCE_CODE">RAKU SOURCE CODE</a></td></tr>
@@ -60,7 +59,7 @@ Output: true
 <p>We'll us a hash to keep track of the number of each bill in the till. We'll start with no bills in the till, and then for each bill received, we'll increment the count of that bill in the till.</p><p>If the bill is a $10, we'll decrement the count of $5 bills in the till.</p><p>If the bill is a $20, we'll also decrement the count of $5 bills in the till, and if there are no $10 bills in the till, we'll decrement the count of $5 bills in the till by another 2.</p><p>If the count of $5 bills in the till ever goes negative, then we can't make change, and we return 'false'.</p></section>
 <section name="pod"><pre class="pod-block-code">    1| multi sub MAIN (
     2|     *@input where all(@input) ~~ 5|10|20,
-    3|     --&gt; Str 
+    3|     --&gt; Str
     4|     ) {
 </pre></section>
 <section name="pod">
@@ -74,7 +73,7 @@ Output: true
 </section>
 <section name="pod"><pre class="pod-block-code">    7|     for @input -&gt; $bill {
     8|         %bills{$bill}++;
-    9| 
+    9|
    10|         given $bill {
    11|             when 10 { %bills{5}-- }
    12|             when 20 {
@@ -82,21 +81,21 @@ Output: true
    14|                 %bills{10} &gt; 0
    15|                     ?? (%bills{10} -= 1)
    16|                     !! (%bills{5}  -= 2);
-   17|             } 
-   18|         } 
-   19| 
+   17|             }
+   18|         }
+   19|
    20|         if %bills{5} &lt; 0 {
    21|             $retval = 'false';
    22|             last;
-   23|         } 
-   24|     } 
+   23|         }
+   24|     }
 </pre></section>
 <section name="pod">
 <h3 id="Print_and_return_whether_the_bills_can_be_used_to_make_change."><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Print and return whether the bills can be used to make change.</a></h3>
 </section>
 <section name="pod"><pre class="pod-block-code">   25|     say $retval;
    26|     return $retval;;
-   27| } 
+   27| }
 </pre></section>
 <section name="pod">
 <h1 id="Sample_run_with_debug_prints"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Sample run with debug prints</a></h1>
@@ -121,7 +120,7 @@ false
 <p>The complete source code for this solution can be found at <a href="https://gist.github.com/deoac/8293603bda2684b1231638ad1853f308">Challenge 236, Task 1</a></p>
 <h1 id="LICENCE_AND_COPYRIGHT"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
 <p>© 2023 Shimon Bollinger. All rights reserved.</p><p>This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself. See <a href="http://perldoc.perl.org/perlartistic.html">perlartistic</a>.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p></section>		</div>
-</div><footer><div>Rendered from <span class="path"></span></div><div>at <span class="time">2023-10-01T03:41:58Z</span></div></footer>
+</div>
 	</body>
 </html>
 
