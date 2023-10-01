@@ -11,16 +11,6 @@
     justify-content: end; }
 
 
-div.latex-render {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-div.latex-render img.logo {
-  align-self: center;
-}
-
-
 hr.bluish-dots, .yellowish-dots, .greenish-dots, .reddish-dots {
   border: none;
   margin: 0 3em;
@@ -63,3 +53,13 @@ p.quotation .citation {
 div.flex-container {
   display: flex;
 }
+
+div.latex-render {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+div.latex-render img.logo {
+  align-self: center;
+}
+

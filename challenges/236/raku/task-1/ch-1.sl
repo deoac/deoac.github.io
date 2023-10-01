@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 1
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 11:29:05 PM EDT
+# Last modified: Sat 30 Sep 2023 11:41:30 PM EDT
 # Version 0.0.1
 
 # begin-no-weave
@@ -165,7 +165,7 @@ Comments and Pull Requests are welcome.
 =head1 RAKU SOURCE CODE
 
 The complete source code for this solution can be found at
-L<Challenge 236, Task 1|https://gist.github.com/deoac/>
+L<Challenge 236, Task 1|https://gist.github.com/deoac/8293603bda2684b1231638ad1853f308>
 
 
 =head1 LICENCE AND COPYRIGHT
