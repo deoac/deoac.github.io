@@ -1,38 +1,39 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>The Perl Weekly Challenge</title>
+<title>Challenge 236 Task 2: Array Loops</title>
 <meta charset="UTF-8" />
 
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-extra.css" />
-<link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-styling.css" />
+<link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 
 </head>
 	<body class="pod">
 <header>
-<h1 class="title">The Perl Weekly Challenge</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
+<h1 class="title">Challenge 236 Task 2: Array Loops</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
 <caption>Table of Contents</caption>
-<tr class="toc-level-2"><td class="toc-text"><a href="#Challenge_#236_Task_2,_Array_Loops">Challenge #236 Task 2, Array Loops</a></td></tr>
+<tr class="toc-level-2"><td class="toc-text"><a href="#The_Challenge">The Challenge</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">&nbsp;&nbsp;&nbsp;&nbsp;&nbspExample 2</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">&nbsp;&nbsp;&nbsp;&nbsp;&nbspExample 3</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Example_3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3</a></td></tr>
  <tr class="toc-level-2"><td class="toc-text"><a href="#The_Solution">The Solution</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">&nbsp;&nbsp;&nbsp;&nbsp;&nbspThe Basic Algorithm</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_variables">&nbsp;&nbsp;&nbsp;&nbsp;&nbspInitialize variables</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#The_Main_Loop">&nbsp;&nbsp;&nbsp;&nbsp;&nbspThe Main Loop</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_the_number_of_loops_found.">&nbsp;&nbsp;&nbsp;&nbsp;&nbspPrint and return the number of loops found.</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Basic Algorithm</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_variables">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initialize variables</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#The_Main_Loop">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Main Loop</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_the_number_of_loops_found.">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print and return the number of loops found.</a></td></tr>
  <tr class="toc-level-2"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#AUTHOR">AUTHOR</a></td></tr>
+ <tr class="toc-level-1"><td class="toc-text"><a href="#RAKU_SOURCE_CODE">RAKU SOURCE CODE</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#LICENCE_AND_COPYRIGHT">LICENCE AND COPYRIGHT</a></td></tr>
 </table></div>
 </nav><div id=""></div><div class="subtitle"><p>Submitted By: Mark Anderson</p></div><div class="pod-body">
 <section name="___top">
-<h2 id="Challenge_#236_Task_2,_Array_Loops"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Challenge #236 Task 2, Array Loops</a></h2>
+<h2 id="The_Challenge"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">The Challenge</a></h2>
 <p>You are given an array of unique integers.</p><p>Write a script to determine how many loops are in the given array.</p><dl>
 <dt>To determine a loop: Start at an index and take the number at array[index] and then proceed to that index and continue this until you end up at the starting index.</dt><dd></dd>
 </dl>
-<h3 id="Example_1"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 1</a></h3>
+<h3 id="Example_1"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Example 1</a></h3>
 <pre class="pod-block-code">Input: @ints = (4,6,3,8,15,0,13,18,7,16,14,19,17,5,11,1,12,2,9,10)
 Output: 3
 
@@ -46,7 +47,7 @@ Loops are as below:
 [14 11 19 10]
 
 </pre>
-<h3 id="Example_2"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 2</a></h3>
+<h3 id="Example_2"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Example 2</a></h3>
 <pre class="pod-block-code">Input: @ints = (0,1,13,7,6,8,10,11,2,14,16,4,12,9,17,5,3,18,15,19)
 Output: 6
 
@@ -58,17 +59,17 @@ Loops are as below:
 [12]
 [19]
 </pre>
-<h3 id="Example_3"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Example 3</a></h3>
+<h3 id="Example_3"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Example 3</a></h3>
 <pre class="pod-block-code">Input: @ints = (9,8,3,11,5,7,13,19,12,4,14,10,18,2,16,1,0,15,6,17)
 Output: 1
 
 Loop is as below:
 [9 4 5 7 19 17 15 1 8 12 18 6 13 2 3 11 10 14 16 0]
 </pre>
-<h2 id="The_Solution"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Solution</a></h2>
+<h2 id="The_Solution"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">The Solution</a></h2>
 </section>
 <section name="pod">
-<h3 id="The_Basic_Algorithm"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Basic Algorithm</a></h3>
+<h3 id="The_Basic_Algorithm"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">The Basic Algorithm</a></h3>
 <p>We will create a pointer to the first index of the array and attempt to find a loop that starts with that element.</p><p>It's important to remember that each element can be a part of only <u>one</u> loop, even if it is a loop by itself.</p><p>Every time we find an element, we will push it to a current-loop array and set the element to <code>Nil</code> so that we don't use it again.</p><p>If we find a loop<sup><a name="fnret1" href="#fn1">[1]</a></sup>
 , we will push it to an array of loops. Note that a loop can consist of a single element. After we find a loop, we will move the start pointer to the next defined element and try again.</p><p>First we will only accept input that is a list of unique integers.</p></section>
 <section name="pod"><pre class="pod-block-code">    1| multi MAIN (#| A list of unique integers
@@ -77,7 +78,7 @@ Loop is as below:
     4|         ) {
 </pre></section>
 <section name="pod">
-<h3 id="Initialize_variables"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Initialize variables</a></h3>
+<h3 id="Initialize_variables"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Initialize variables</a></h3>
 </section>
 <section name="pod"><pre class="pod-block-code">    5|     my Int @ints          = @input&gt;&gt;.Int;
     6|     my Int $num-elems     = @ints.elems;
@@ -89,7 +90,7 @@ Loop is as below:
    10|     my @all-loops = [];
 </pre></section>
 <section name="pod">
-<h3 id="The_Main_Loop"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">The Main Loop</a></h3>
+<h3 id="The_Main_Loop"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">The Main Loop</a></h3>
 <p>As long as there is a defined element in the array, <code>$start-pointer</code>, we will try to find a loop that starts with that element.</p></section>
 <section name="pod"><pre class="pod-block-code">   11|     INDEX:
    12|     while $start-pointer.defined {
@@ -140,7 +141,7 @@ Loop is as below:
    34|
 </pre></section>
 <section name="pod">
-<h3 id="Print_and_return_the_number_of_loops_found."><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Print and return the number of loops found.</a></h3>
+<h3 id="Print_and_return_the_number_of_loops_found."><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Print and return the number of loops found.</a></h3>
 </section>
 <section name="pod"><pre class="pod-block-code">   35|     say @all-loops.elems;
    36|
@@ -148,7 +149,7 @@ Loop is as below:
    38| }
 </pre></section>
 <section name="pod">
-<h2 id="Sample_run_with_debug_prints"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">Sample run with debug prints</a></h2>
+<h2 id="Sample_run_with_debug_prints"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">Sample run with debug prints</a></h2>
 <p>(The option <code>--verbose</code> and the debug print statements are not shown in the above code.)</p><pre class="pod-block-code">$ ./ch-2.raku --verbose 1 0 8 5 4 3 9
 
 Array[Int] @ints = Array[Int].new(Int, 0, 8, 5, 4, 3, 9)
@@ -220,16 +221,18 @@ All loops:
 Number of loops: 5
 </pre></section>
 <section name="pod">
-<h1 id="AUTHOR"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">AUTHOR</a></h1>
-<p>Shimon Bollinger (deoac.shimon@gmail.com)</p><p>The complete source can be located at: <a href="https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b">Challenge 236, Task 2</a></p><p>Comments and Pull Requests are welcome.</p>
-<h1 id="LICENCE_AND_COPYRIGHT"><a href="#The_Perl_Weekly_Challenge" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
+<h1 id="AUTHOR"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">AUTHOR</a></h1>
+<p>Shimon Bollinger (<a href="mailto:deoac.shimon@gmail.com.html">deoac.shimon@gmail.com</a>)</p><p>Comments and Pull Requests are welcome.</p>
+<h1 id="RAKU_SOURCE_CODE"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">RAKU SOURCE CODE</a></h1>
+<p>The complete source code for this solution can be found at <a href="https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b">Challenge 236, Task 2</a></p>
+<h1 id="LICENCE_AND_COPYRIGHT"><a href="#Challenge_236_Task_2:_Array_Loops" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
 <p>© 2023 Shimon Bollinger. All rights reserved.</p><p>This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself. See <a href="http://perldoc.perl.org/perlartistic.html">perlartistic</a>.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p></section>		</div>
 <div id="_Footnotes" class="footnotes">
 <ul><li id="fn1"><span class="footnote-number">1</span> A 'loop' is defined as a list of array element values, not a list of the array's indices.<a class="footnote" href="#fnret1"> « Back »</a></li>
 
 </ul>
 </div>
-</div><footer><div>Rendered from <span class="path"></span></div><div>at <span class="time">2023-09-30T23:52:05Z</span></div></footer>
+</div>
 	</body>
 </html>
 

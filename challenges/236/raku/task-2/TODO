@@ -1,0 +1,5 @@
+Remove line 7 <link href="/asset_files/images/favicon.ico" rel="icon" type="image/x-icon"/>
+Remove line 14 <img id="Camelia_bug" src="/asset_files/images/Camelia.svg">
+Remove <footer>
+Add a space after the footnote numbers
+Add spaces before the =head2,3 in the TOC

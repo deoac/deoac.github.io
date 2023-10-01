@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 2
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 07:51:54 PM EDT
+# Last modified: Sat 30 Sep 2023 08:29:21 PM EDT
 # Version 0.0.1
 
 # begin-no-weave
@@ -11,11 +11,11 @@ use v6.*;
 # end-no-weave
 
 =begin pod
-=TITLE The Perl Weekly Challenge
+=TITLE Challenge 236 Task 2: Array Loops
 
 =SUBTITLE Submitted By: Mark Anderson
 
-=head2 Challenge #236 Task 2, Array Loops
+=head2 The Challenge
 
 You are given an array of unique integers.
 
@@ -339,12 +339,15 @@ Number of loops: 5
 
 =head1 AUTHOR
 
-Shimon Bollinger  (deoac.shimon@gmail.com)
-
-The complete source can be located at:
-L<Challenge 236, Task 2|https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b>
+Shimon Bollinger (L<deoac.shimon@gmail.com|mailto:deoac.shimon@gmail.com>)
 
 Comments and Pull Requests are welcome.
+
+=head1 RAKU SOURCE CODE
+
+The complete source code for this solution can be found at
+L<Challenge 236, Task 2|https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b>
+
 
 =head1 LICENCE AND COPYRIGHT
 
