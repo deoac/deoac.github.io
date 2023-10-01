@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 1
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 11:13:19 PM EDT
+# Last modified: Sat 30 Sep 2023 11:29:05 PM EDT
 # Version 0.0.1
 
 # always use the latest version of Raku
@@ -11,10 +11,8 @@ use v6.*;
 multi sub MAIN (
     #| The bills to be used to make change (5, 10, 20)
     *@input where all(@input) ~~ 5|10|20,
-
     #| Show debug prints when True
     Bool :v($verbose) = False 
-
     --> Str #Return 'true' if the bills can be used to make change
     ) {
 
@@ -34,8 +32,9 @@ multi sub MAIN (
             } # end of when 20
         } # end of given $bills
 
-        note "Received \$$bill, have %bills{5} \$5s, %bills{10} \$10s, and %bills{20} \$20s in the till" if $verbose; 
-
+        note "Received \$$bill, " ~
+             "have %bills{5} \$5s, %bills{10} \$10s, and %bills{20} \$20s " ~
+             "in the till" if $verbose; #
         if %bills{5} < 0 {
             $retval = 'false';
             last;
@@ -44,7 +43,6 @@ multi sub MAIN (
 
     say $retval;
     return $retval;;
-
 } # end of multi MAIN (*@input where * == 5|10|20,
 
 # multi MAINs to catch invalid input

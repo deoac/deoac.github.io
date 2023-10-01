@@ -2,7 +2,7 @@
 
 # Perl Weekly Challenge #236 Task 1
 # © 2023 Shimon Bollinger. All rights reserved.
-# Last modified: Sat 30 Sep 2023 11:13:19 PM EDT
+# Last modified: Sat 30 Sep 2023 11:29:05 PM EDT
 # Version 0.0.1
 
 # begin-no-weave
@@ -56,7 +56,6 @@ Since not every customer received the correct change, the answer is false.
 =begin code :lang<bash>
 Input: @bills = (5, 5, 5, 20)
 Output: true
-
 =end code
 
 
@@ -64,15 +63,26 @@ Output: true
 
 =head3 The Basic Algorithm
 
+We'll us a hash to keep track of the number of each bill in the till.  We'll
+start with no bills in the till, and then for each bill received, we'll
+increment the count of that bill in the till.
+
+If the bill is a $10, we'll decrement the count of $5 bills in the till.
+
+If the bill is a $20, we'll also decrement the count of $5 bills in the till,
+and if there are no $10 bills in the till, we'll decrement the count of $5
+bills in the till by another 2.
+
+If the count of $5 bills in the till ever goes negative, then we can't make
+change, and we return 'false'.
+
 =end pod
 
 multi sub MAIN (
     #| The bills to be used to make change (5, 10, 20)
     *@input where all(@input) ~~ 5|10|20,
-
     #| Show debug prints when True
     Bool :v($verbose) = False # no-weave-this-line
-
     --> Str #Return 'true' if the bills can be used to make change
     ) {
 
@@ -82,6 +92,10 @@ multi sub MAIN (
 
     my Int %bills = (5 => 0, 10 => 0, 20 => 0);
     my Str $retval = 'true';
+
+=begin pod
+=head3 Process the bills
+=end pod
 
     for @input -> $bill {
         %bills{$bill}++;
@@ -96,8 +110,11 @@ multi sub MAIN (
             } # end of when 20
         } # end of given $bills
 
-        note "Received \$$bill, have %bills{5} \$5s, %bills{10} \$10s, and %bills{20} \$20s in the till" if $verbose; # no-weave-this-line
-
+        # begin-no-weave
+        note "Received \$$bill, " ~
+             "have %bills{5} \$5s, %bills{10} \$10s, and %bills{20} \$20s " ~
+             "in the till" if $verbose; #
+        # end-no-weave
         if %bills{5} < 0 {
             $retval = 'false';
             last;
@@ -112,7 +129,6 @@ multi sub MAIN (
 =end pod
     say $retval;
     return $retval;;
-
 } # end of multi MAIN (*@input where * == 5|10|20,
 
 =begin pod
@@ -124,7 +140,20 @@ above code.)
 
 =begin code :lang<sh>
 
-$ ./ch-1.raku --verbose
+$ ./ch-1.raku -verbose 5 5 10 20
+Received $5, have 1 $5s, 0 $10s, and 0 $20s in the till
+Received $5, have 2 $5s, 0 $10s, and 0 $20s in the till
+Received $10, have 1 $5s, 1 $10s, and 0 $20s in the till
+Received $20, have 0 $5s, 0 $10s, and 1 $20s in the till
+true
+
+./ch-1.raku -verbose 5 5 10 10 20
+Received $5, have 1 $5s, 0 $10s, and 0 $20s in the till
+Received $5, have 2 $5s, 0 $10s, and 0 $20s in the till
+Received $10, have 1 $5s, 1 $10s, and 0 $20s in the till
+Received $10, have 0 $5s, 2 $10s, and 0 $20s in the till
+Received $20, have -1 $5s, 1 $10s, and 1 $20s in the till
+false
 =end code
 
 =head1 AUTHOR

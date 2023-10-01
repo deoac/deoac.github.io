@@ -1,18 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Challenge #2236 Task 1</title>
+<title>Challenge #236 Task 1</title>
 <meta charset="UTF-8" />
 
-<link href="/asset_files/images/favicon.ico" rel="icon" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-extra.css" />
-<link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="asset_files/css/rakudoc-styling.css" />
+<link rel="stylesheet" type="text/css" href="asset_files/css/font-awesome.min.css" />
 
 </head>
 	<body class="pod">
 <header>
-<img id="Camelia_bug" src="/asset_files/images/Camelia.svg"><h1 class="title">Challenge #2236 Task 1</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
+<h1 class="title">Challenge #236 Task 1</h1></header><div class="pod-content"><nav><div id="_TOC"><table>
 <caption>Table of Contents</caption>
 <tr class="toc-level-2"><td class="toc-text"><a href="#The_Challenge">The Challenge</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#Example_1">Example 1</a></td></tr>
@@ -21,17 +20,18 @@
  <tr class="toc-level-2"><td class="toc-text"><a href="#The_Solution">The Solution</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#The_Basic_Algorithm">The Basic Algorithm</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#Initialize_the_variables">Initialize the variables</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#Process_the_bills">Process the bills</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#Print_and_return_whether_the_bills_can_be_used_to_make_change.">Print and return whether the bills can be used to make change.</a></td></tr>
- <tr class="toc-level-2"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
+ <tr class="toc-level-1"><td class="toc-text"><a href="#Sample_run_with_debug_prints">Sample run with debug prints</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#AUTHOR">AUTHOR</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#RAKU_SOURCE_CODE">RAKU SOURCE CODE</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#LICENCE_AND_COPYRIGHT">LICENCE AND COPYRIGHT</a></td></tr>
 </table></div>
 </nav><div id=""></div><div class="subtitle"><p>Submitted By: Mohammad S Anwar</p></div><div class="pod-body">
 <section name="___top">
-<h2 id="The_Challenge"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">The Challenge</a></h2>
+<h2 id="The_Challenge"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">The Challenge</a></h2>
 <p>You are asked to sell juice each costs $5. You are given an array of bills. You can only sell ONE juice to each customer but make sure you return exact change back. You only have $5, $10 and $20 notes. You do not have any change in hand at first.</p><p>Write a script to find out if it is possible to sell to each customers with correct change.</p>
-<h3 id="Example_1"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Example 1</a></h3>
+<h3 id="Example_1"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Example 1</a></h3>
 <pre class="pod-block-code">Input: @bills = (5, 5, 5, 10, 20)
 Output: true
 
@@ -40,7 +40,7 @@ From the fourth customer, we collect a $10 bill and give back a $5.
 From the fifth customer, we give a $10 bill and a $5 bill.
 Since all customers got correct change, we output true.
 </pre>
-<h3 id="Example_2"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Example 2</a></h3>
+<h3 id="Example_2"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Example 2</a></h3>
 <pre class="pod-block-code">Input: @bills = (5, 5, 10, 10, 20)
 Output: false
 
@@ -49,45 +49,78 @@ For the next two customers in order, we collect a $10 bill and give back a $5 bi
 For the last customer, we can not give the change of $15 back because we only have two $10 bills.
 Since not every customer received the correct change, the answer is false.
 </pre>
-<h3 id="Example_3"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Example 3</a></h3>
+<h3 id="Example_3"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Example 3</a></h3>
 <pre class="pod-block-code">Input: @bills = (5, 5, 5, 20)
 Output: true
-
 </pre>
-<h2 id="The_Solution"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">The Solution</a></h2>
+<h2 id="The_Solution"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">The Solution</a></h2>
 
-<h3 id="The_Basic_Algorithm"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">The Basic Algorithm</a></h3>
-</section>
-<section name="pod"><pre class="pod-block-code">    1| multi sub MAIN(
+<h3 id="The_Basic_Algorithm"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">The Basic Algorithm</a></h3>
+<p>We'll us a hash to keep track of the number of each bill in the till. We'll start with no bills in the till, and then for each bill received, we'll increment the count of that bill in the till.</p><p>If the bill is a $10, we'll decrement the count of $5 bills in the till.</p><p>If the bill is a $20, we'll also decrement the count of $5 bills in the till, and if there are no $10 bills in the till, we'll decrement the count of $5 bills in the till by another 2.</p><p>If the count of $5 bills in the till ever goes negative, then we can't make change, and we return 'false'.</p></section>
+<section name="pod"><pre class="pod-block-code">    1| multi sub MAIN (
     2|     *@input where all(@input) ~~ 5|10|20,
-    3| 
-    4| 
-    5|     --&gt; Str 
-    6|     ) {
+    3|     --&gt; Str
+    4|     ) {
 </pre></section>
 <section name="pod">
-<h3 id="Initialize_the_variables"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Initialize the variables</a></h3>
+<h3 id="Initialize_the_variables"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Initialize the variables</a></h3>
 </section>
-<section name="pod"><pre class="pod-block-code">    7|     my Str $retval = 'false';
+<section name="pod"><pre class="pod-block-code">    5|     my Int %bills = (5 =&gt; 0, 10 =&gt; 0, 20 =&gt; 0);
+    6|     my Str $retval = 'true';
 </pre></section>
 <section name="pod">
-<h3 id="Print_and_return_whether_the_bills_can_be_used_to_make_change."><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Print and return whether the bills can be used to make change.</a></h3>
-<pre class="pod-block-code">say $retval;
-return $retval;;</pre></section>
-<section name="pod"><pre class="pod-block-code">    8| } 
+<h3 id="Process_the_bills"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Process the bills</a></h3>
+</section>
+<section name="pod"><pre class="pod-block-code">    7|     for @input -&gt; $bill {
+    8|         %bills{$bill}++;
+    9|
+   10|         given $bill {
+   11|             when 10 { %bills{5}-- }
+   12|             when 20 {
+   13|                 %bills{5}--;
+   14|                 %bills{10} &gt; 0
+   15|                     ?? (%bills{10} -= 1)
+   16|                     !! (%bills{5}  -= 2);
+   17|             }
+   18|         }
+   19|
+   20|         if %bills{5} &lt; 0 {
+   21|             $retval = 'false';
+   22|             last;
+   23|         }
+   24|     }
 </pre></section>
 <section name="pod">
-<h2 id="Sample_run_with_debug_prints"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">Sample run with debug prints</a></h2>
-<p>(The option <code>--verbose</code> and the debug print statements are not shown in the above code.)</p><pre class="pod-block-code">$ ./ch-X.raku --verbose
+<h3 id="Print_and_return_whether_the_bills_can_be_used_to_make_change."><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Print and return whether the bills can be used to make change.</a></h3>
+</section>
+<section name="pod"><pre class="pod-block-code">   25|     say $retval;
+   26|     return $retval;;
+   27| }
 </pre></section>
 <section name="pod">
-<h1 id="AUTHOR"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">AUTHOR</a></h1>
+<h1 id="Sample_run_with_debug_prints"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">Sample run with debug prints</a></h1>
+<p>(The option <code>--verbose</code> and the debug print statements are not shown in the above code.)</p><pre class="pod-block-code">$ ./ch-1.raku -verbose 5 5 10 20
+Received $5, have 1 $5s, 0 $10s, and 0 $20s in the till
+Received $5, have 2 $5s, 0 $10s, and 0 $20s in the till
+Received $10, have 1 $5s, 1 $10s, and 0 $20s in the till
+Received $20, have 0 $5s, 0 $10s, and 1 $20s in the till
+true
+
+./ch-1.raku -verbose 5 5 10 10 20
+Received $5, have 1 $5s, 0 $10s, and 0 $20s in the till
+Received $5, have 2 $5s, 0 $10s, and 0 $20s in the till
+Received $10, have 1 $5s, 1 $10s, and 0 $20s in the till
+Received $10, have 0 $5s, 2 $10s, and 0 $20s in the till
+Received $20, have -1 $5s, 1 $10s, and 1 $20s in the till
+false
+</pre>
+<h1 id="AUTHOR"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">AUTHOR</a></h1>
 <p>Shimon Bollinger (<a href="mailto:deoac.shimon@gmail.com.html">deoac.shimon@gmail.com</a>)</p><p>Comments and Pull Requests are welcome.</p>
-<h1 id="RAKU_SOURCE_CODE"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">RAKU SOURCE CODE</a></h1>
-<p>The complete source code for this solution can be found at <a href="https://gist.github.com/deoac/9d9da96cbaaaf026b4774c98db5f7c3b">Challenge 236, Task 2</a></p>
-<h1 id="LICENCE_AND_COPYRIGHT"><a href="#Challenge_#2236_Task_1" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
+<h1 id="RAKU_SOURCE_CODE"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">RAKU SOURCE CODE</a></h1>
+<p>The complete source code for this solution can be found at <a href="https://gist.github.com/deoac/">Challenge 236, Task 1</a></p>
+<h1 id="LICENCE_AND_COPYRIGHT"><a href="#Challenge_#236_Task_1" class="u" title="go to top of document">LICENCE AND COPYRIGHT</a></h1>
 <p>© 2023 Shimon Bollinger. All rights reserved.</p><p>This module is free software; you can redistribute it and/or modify it under the same terms as Perl itself. See <a href="http://perldoc.perl.org/perlartistic.html">perlartistic</a>.</p><p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p></section>		</div>
-</div><footer><div>Rendered from <span class="path"></span></div><div>at <span class="time">2023-10-01T01:51:05Z</span></div></footer>
+</div>
 	</body>
 </html>
 

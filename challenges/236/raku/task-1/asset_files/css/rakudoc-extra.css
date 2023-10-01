@@ -1,14 +1,4 @@
 
-div.latex-render {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-div.latex-render img.logo {
-  align-self: center;
-}
-
-
 .image-container {
   display: flex;
   width: 100%;
@@ -19,6 +9,16 @@ div.latex-render img.logo {
     justify-content: start; }
   .image-container.justify-right {
     justify-content: end; }
+
+
+div.latex-render {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+div.latex-render img.logo {
+  align-self: center;
+}
 
 
 hr.bluish-dots, .yellowish-dots, .greenish-dots, .reddish-dots {
